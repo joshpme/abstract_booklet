@@ -15,4 +15,4 @@ print_functions.print_abstracts(document, sessions)
 print_functions.print_authors(document, authors)
 
 # save document
-document.save('OUTPUT/example.docx')
+document.save('OUTPUT/abstract_booklet.docx')
