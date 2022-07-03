@@ -165,16 +165,23 @@ def get_papers(sessions):
     return papers
 
 
+def contains_paper(papers, code):
+    for paper in papers:
+        if paper['code'] == code:
+            return True
+    return False
+
+
 def get_authors(papers):
     authors = {}
     for paper in papers:
         for author in paper['all_authors']:
             if author['id'] in authors:
-                if paper['code'] not in authors[author['id']]['papers']:
-                    authors[author['id']]['papers'].append(paper['code'])
+                if not contains_paper(authors[author['id']]['papers'], paper['code']):
+                    authors[author['id']]['papers'].append(paper)
             else:
                 authors[author['id']] = author
-                authors[author['id']]['papers'] = [paper['code']]
+                authors[author['id']]['papers'] = [paper]
 
     return authors.values()
 

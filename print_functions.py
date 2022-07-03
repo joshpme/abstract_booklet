@@ -104,6 +104,15 @@ def print_abstracts(d, sessions):
                 footnote_run.add_text(paper['footnote'])
 
 
+def is_primary_author(paper, person):
+    all_authors = paper['all_authors']
+    for author in all_authors:
+        if author['id'] == person['id'] and \
+                'person_type' in author and \
+                author['person_type'] == "Primary Author":
+            return True
+    return False
+
 def print_authors(d, authors):
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -142,4 +151,5 @@ def print_authors(d, authors):
                     joiner = ""
                     if i != len(author['papers']) - 1:
                         joiner = ", "
-                    author_run.add_text(paper + joiner)
+                    p.add_run(paper['code'] + joiner).italic = is_primary_author(paper, author)
+
