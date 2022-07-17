@@ -8,8 +8,14 @@ def get_paper(paper):
     title = paper['title']
     abstract = paper['abstract']
     code = paper['program_codes']['program_code']['code']['#text']
-    start_time = paper['program_codes']['program_code']['start_time']
-    duration = paper['program_codes']['program_code']['duration']
+
+    start_time = None
+    if 'start_time' in paper['program_codes']['program_code']:
+        start_time = paper['program_codes']['program_code']['start_time']
+
+    duration = None
+    if 'duration' in paper['program_codes']['program_code']:
+        duration = paper['program_codes']['program_code']['duration']
 
     if isinstance(paper['contributors']['contributor'], list):
         all_authors = list(map(lambda contributor: get_person(contributor), paper['contributors']['contributor']))
